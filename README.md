@@ -1,1 +1,1 @@
-ALX Africa intro to AIrBnB clone project
+ALX Africa intro to AirBnB Project
