@@ -1,1 +1,1 @@
-This is AIirBnB clone project
+ALX Africa intro to AIrBnB clone project
