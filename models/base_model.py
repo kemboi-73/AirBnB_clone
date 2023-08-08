@@ -5,6 +5,7 @@ from which all other classes inherit common attributes and methods
 from datetime import datetime, date
 import uuid
 
+
 class BaseModel:
     """This is a base class that contains common objects shared by other
     child classes
