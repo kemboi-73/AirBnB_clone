@@ -86,3 +86,77 @@ class TestBaseModel(unittest.TestCase):
         sleep(2)
         b2 = BaseModel()
         self.assertLess(b1.updated_at, b2.updated_at)
+        
+    def test_base_str_method(self):
+        """Tests base class str method"""
+        b1 = BaseModel()
+        b2 = BaseModel()
+        self.assertNotEqual(b1.__str__, b2.__str__)
+
+    def test_base_save_method(self):
+        """Tests if save methid is working correctly"""
+        b = BaseModel()
+        sleep(2)
+        prev_update = b.updated_at
+        b.save()
+        self.assertLess(prev_update, b.updated_at)
+
+    def test_base_two_saves(self):
+        "Tests two instances of save method"""
+        b = BaseModel()
+        sleep(2)
+        update_1 = b.updated_at
+        b.save()
+        update_2 = b.updated_at
+        self.assertLess(update_1, update_2)
+        sleep(2)
+        b.save()
+        self.assertLess(update_2, b.updated_at)
+
+    def test_base_to_dict_method(self):
+        """Tests that the dictionary representation of attributes
+        is correct"""
+        b = BaseModel()
+        expected_dict = {
+                'id': b.id,
+                'created_at': b.created_at.isoformat(),
+                'updated_at': b.updated_at.isoformat(),
+                '__class__': 'BaseModel',
+                }
+        self.assertEqual(b.to_dict(), expected_dict)
+
+    def test_base_dict_is_returned(self):
+        """Checks that base class returns a dictionary"""
+        b = BaseModel()
+        self.assertTrue(dict, type(b.to_dict()))
+
+    def test_base_diff_dict_instances(self):
+        """Checks that two class instantiations return
+        different dicts"""
+        b1 = BaseModel()
+        sleep(2)
+        b2 = BaseModel()
+        self.assertNotEqual(b1.to_dict(), b2.to_dict())
+
+    def test_base_to_dict_correct_keys(self):
+        """Verifies that dict has correct keys"""
+        b = BaseModel()
+        self.assertIn('id', b.to_dict())
+        self.assertIn('created_at', b.to_dict())
+        self.assertIn('updated_at', b.to_dict())
+        self.assertIn('__class__', b.to_dict())
+
+    def test_dict_created_at_format(self):
+        """Confims the format of 'created_at' attribute"""
+        b = BaseModel()
+        b1 = b.to_dict()
+        _format = b1['created_at']
+        self.assertEqual(_format, b.created_at.isoformat())
+
+    def test_dict_updated_at_format(self):
+        """Confirms 'updated_at' is string format"""
+        b = BaseModel()
+        b1 = b.to_dict()
+        _format = b1['updated_at']
+        self.assertEqual(_format, b.updated_at.isoformat())
+
