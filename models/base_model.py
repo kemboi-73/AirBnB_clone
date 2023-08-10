@@ -4,6 +4,8 @@ from which all other classes inherit common attributes and methods
 """
 from datetime import datetime, date
 import uuid
+import json
+import models
 
 
 class BaseModel:
@@ -15,7 +17,8 @@ class BaseModel:
         if kwargs:
             for key, value in kwargs.items():
                 if key == "__class__":
-                    continue
+			setattr(self, key, value)
+			continue
                 elif key == "created_at" or key == "updated_at":
                     setattr(self, key, datetime.fromisoformat(value))
                 else:
@@ -34,6 +37,8 @@ class BaseModel:
     def save(self):
         """Updates 'updated_at' attribute with the current datetime"""
         self.updated_at = datetime.now()
+	models.storage.new(self)
+	models.storage.save()
 
     def to_dict(self):
         """Returns a dictionary containing all keys/values
