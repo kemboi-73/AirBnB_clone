@@ -5,7 +5,7 @@ classes and their management."""
 
 from json import dump, load, dumps
 from os.path import exists
-from models import base_model, user, place, state, city, amenity, review
+from models import base_model
 
 BaseModel = base_model.BaseModel
 State = state.State
@@ -14,8 +14,7 @@ Amenity = amenity.Amenity
 Place = place.Place
 Review = review.Review
 User = user.User
-name_class = ["BaseModel", "City", "State",
-              "Place", "Amenity", "Review", "User"]
+name_class = ["BaseModel", "City", "State","Place", "Amenity", "Review", "User"]
 
 
 class FileStorage:
