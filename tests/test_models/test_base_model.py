@@ -160,3 +160,8 @@ class TestBaseModel(unittest.TestCase):
         _format = b1['updated_at']
         self.assertEqual(_format, b.updated_at.isoformat())
 
+    def test_base_storage_retrieval(self):
+        """Tests whether base instances are stored and retrieved successfully"""
+        b = BaseModel()
+        self.assertIn(b, models.storage.all().values())
+
