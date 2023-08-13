@@ -21,7 +21,6 @@ class TestAmenityDocs(unittest.TestCase):
         self.assertTrue(len(Amenity.__doc__) > 0)
 
 
-@unittest.expectedFailure
 class TestAmenityPep8(unittest.TestCase):
     """ check for pep8 validation """
     def test_pep8(self):
